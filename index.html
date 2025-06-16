@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Care & Tax Services</title>
+  <style>
+    body { margin: 0; font-family: 'Inter', sans-serif; background: #f9f9f9; color: #1c1c1c; }
+    h1, h2 { text-align: center; }
+    h1 { font-size: 2.5rem; margin-top: 40px; }
+    .subtitle { font-size: 1.2rem; color: #555; max-width: 800px; margin: 10px auto 30px; line-height: 1.6; }
+    .hero-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+    .hero-actions .btn-phone { font-size: 1rem; padding: 10px 20px; background: #0077cc; color: #fff; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s ease; }
+    .hero-actions .btn-phone:hover { background: #005fa3; }
+    .button-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin: 0 auto 30px; }
+    .button-bar button { padding: 12px 20px; font-size: 1rem; background-color: #1c1c1c; color: white; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s ease; }
+    .button-bar button:hover { background-color: #444; }
+    .section { display: none; opacity: 0; max-width: 1200px; margin: 0 auto; padding: 30px 20px; transition: opacity 0.5s ease; }
+    .section.fade-in { opacity: 1; }
+    .container { max-width: 800px; margin: auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .container h1 { font-size: 2rem; margin-bottom: 10px; }
+    .container label { display: block; margin-top: 20px; font-weight: 600; }
+    .container input[type="text"],
+    .container input[type="number"],
+    .container select { width: 100%; padding: 10px; margin-top: 8px; font-size: 1rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    iframe { width: 100%; border: none; }
+    .btn { padding: 10px 20px; margin: 20px 5px 0; background: #1c1c1c; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+    .btn:hover { background: #333; }
+    .progress { width: 100%; background: #eee; height: 8px; margin: 20px 0; border-radius: 4px; }
+    .progress-bar { width: 0; height: 100%; background: #0077cc; border-radius: 4px; transition: width 0.3s ease; }
+    .step { display: none; }
+    .step.active { display: block; }
+    .summary { margin: 20px 0; font-size: 1rem; line-height: 1.5; }
+    .disclaimer { font-size: 0.9rem; color: #777; }
+  </style>
+</head>
+<body>
+  <h1>Welcome! How can we help you today?</h1>
+  <p class="subtitle">From booking appointments to uploading documents and estimating your taxes, our intuitive portal empowers you to manage everything in one place. Need a hand? Reach out directly below.</p>
+  <div class="hero-actions">
+    <button class="btn-phone" onclick="location.href='tel:18887117206'">📞 Call Us: (888) 711‑7206</button>
+  </div>
+  <div class="button-bar">
+    <button onclick="showSection('appointment')">🗕️ Book an Appointment</button>
+    <button onclick="showSection('upload')">🛄 Upload Documents</button>
+    <button onclick="showSection('estimator')">📊 Tax Estimator</button>
+    <button onclick="window.open('https://forms.zoho.com/caretaxservices1/form/ObamaCareACAApplication','_blank')">🏥 Obama-Care Application</button>
+  </div>
+
+  <div id="appointment" class="section">
+    <iframe height="750" src="https://info-caretaxservices.zohobookings.com/portal-embed#/caretaxservices" allowfullscreen></iframe>
+  </div>
+
+  <div id="upload" class="section">
+    <iframe aria-label="Securely Upload Documents" height="500" src="https://forms.zohopublic.com/caretaxservices1/form/UploadDocuments/formperma/OAaNOkGETVmffER-Az1hxQsMh5xx16JKVQwJ6WM4XVs"></iframe>
+  </div>
+
+  <div id="estimator" class="section">
+    <div class="container">
+      <h1>Care & Tax Services</h1>
+      <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+      <div class="step active" id="step1">
+        <h2>Basic Info</h2>
+        <input type="text" value="2025" disabled>
+        <label for="filingStatus">Filing Status:</label>
+        <select id="filingStatus">
+          <option value="">-- Select Status --</option>
+          <option value="single">Single</option>
+          <option value="married">Married Filing Jointly</option>
+          <option value="mfs">Married Filing Separately</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+        <button class="btn" onclick="nextStep(2)">Next</button>
+      </div>
+
+      <div class="step" id="step2">
+        <h2>Dependents</h2>
+        <label for="childDependents">Children under 17 (for CTC):</label>
+        <input type="number" id="childDependents" min="0" value="0">
+        <label for="otherDependents">Other Dependents:</label>
+        <input type="number" id="otherDependents" min="0" value="0">
+        <label for="childClaim">Who is claiming the child for credits?</label>
+        <select id="childClaim">
+          <option value="">-- Select One --</option>
+          <option value="you">I am</option>
+          <option value="other">The other parent</option>
+          <option value="thirdparty">Other relative</option>
+        </select>
+        <button class="btn" onclick="nextStep(1)">Back</button>
+        <button class="btn" onclick="nextStep(3)">Next</button>
+      </div>
+
+      <div class="step" id="step3">
+        <h2>Income Sources</h2>
+        <label><input type="checkbox" onchange="toggleSection('w2Section')"> W-2 Income</label>
+        <div id="w2Section" style="display:none;">
+          <div class="w2-entry">
+            <input type="number" placeholder="W-2 Total Income" class="w2Income">
+            <input type="number" placeholder="W-2 Federal Withheld" class="w2Federal">
+            <input type="number" placeholder="Social Security Withheld" class="w2SS">
+            <input type="number" placeholder="Medicare Withheld" class="w2Medicare">
+          </div>
+          <button class="btn" type="button" onclick="addW2Entry()">Add More</button>
+        </div>
+
+        <label><input type="checkbox" onchange="toggleSection('schedCSection')"> Schedule C</label>
+        <div id="schedCSection" style="display:none;">
+          <input type="number" id="schedCIncome" placeholder="Schedule C Total Income">
+          <input type="number" id="schedCFederal" placeholder="Schedule C Federal Withheld">
+        </div>
+
+        <label><input type="checkbox" onchange="toggleSection('spouseSection')"> Spouse Income</label>
+        <div id="spouseSection" style="display:none;">
+          <label>Select Spouse Income Types:</label>
+          <label><input type="checkbox" onchange="toggleSection('spouseW2Section')"> W-2</label>
+          <label><input type="checkbox" onchange="toggleSection('spouse1099Section')"> 1099</label>
+          <label><input type="checkbox" onchange="toggleSection('spouseScheduleCSection')"> Schedule C</label>
+          <div id="spouseW2Section" style="display:none;">
+            <div class="spouse-w2-entry">
+              <input type="number" placeholder="Spouse W-2 Income" class="spouseW2Income">
+              <input type="number" placeholder="Spouse W-2 Federal Withheld" class="spouseW2Federal">
+            </div>
+            <button class="btn" type="button" onclick="addSpouseW2Entry()">Add More</button>
+          </div>
+          <div id="spouse1099Section" style="display:none;"></div>
+          <div id="spouseScheduleCSection" style="display:none;"></div>
+        </div>
+
+        <label><input type="checkbox" onchange="toggleSection('eduSection')"> 1098-T (Education Credit)</label>
+        <div id="eduSection" style="display:none;"><input type="number" id="eduExpenses" placeholder="Education Expenses"></div>
+
+        <label><input type="checkbox" onchange="toggleSection('energySection')"> Form 5695 (Energy Credit)</label>
+        <div id="energySection" style="display:none;"><input type="number" id="energyCredit" placeholder="Energy Improvements"></div>
+
+        <button class="btn" onclick="nextStep(2)">Back</button>
+        <button class="btn" onclick="calculateEstimate()">Estimate Refund</button>
+      </div>
+
+      <div class="step" id="step4">
+        <h2>Estimated Summary</h2>
+        <div class="summary" id="summaryBox"></div>
+        <div class="disclaimer">* This is an estimate only. Results are not 100% accurate and should not be considered tax advice.</div>
+        <button class="btn" onclick="nextStep(1)">Start Over</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => {
+        sec.style.display = 'none';
+        sec.classList.remove('fade-in');
+      });
+      const target = document.getElementById(id);
+      if (target) {
+        target.style.display = 'block';
+        setTimeout(() => target.classList.add('fade-in'), 10);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+    let currentStep = 1;
+    function nextStep(step) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step' + step).classList.add('active');
+      document.getElementById('progressBar').style.width = ((step - 1) * 33) + '%';
+      currentStep = step;
+    }
+    function toggleSection(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+    function addW2Entry() {
+      const container = document.getElementById('w2Section');
+      const entry = document.createElement('div');
+      entry.classList.add('w2-entry');
+      entry.innerHTML = '<input type="number" placeholder="W-2 Total Income" class="w2Income"><input type="number" placeholder="W-2 Federal Withheld" class="w2Federal"><input type="number" placeholder="Social Security Withheld" class="w2SS"><input type="number" placeholder="Medicare Withheld" class="w2Medicare">';
+      container.insertBefore(entry, container.lastElementChild);
+    }
+    function addSpouseW2Entry() {
+      const container = document.getElementById('spouseW2Section');
+      const entry = document.createElement('div');
+      entry.classList.add('spouse-w2-entry');
+      entry.innerHTML = '<input type="number" placeholder="Spouse W-2 Income" class="spouseW2Income"><input type="number" placeholder="Spouse W-2 Federal Withheld" class="spouseW2Federal">';
+      container.insertBefore(entry, container.lastElementChild);
+    }
+    function calculateEstimate() {
+      const filingStatus = document.getElementById('filingStatus').value;
+      const dependentsUnder17 = parseInt(document.getElementById('childDependents').value) || 0;
+      const otherDependents = parseInt(document.getElementById('otherDependents').value) || 0;
+      const w2Income = [...document.querySelectorAll('.w2Income')].reduce((sum, el) => sum + (parseFloat(el.value) || 0), 0);
+      const w2Withheld = [...document.querySelectorAll('.w2Federal')].reduce((sum, el) => sum + (parseFloat(el.value) || 0), 0);
+      const schedCIncome = parseFloat(document.getElementById('schedCIncome').value) || 0;
+      const schedCFederal = parseFloat(document.getElementById('schedCFederal').value) || 0;
+      const eduExpenses = parseFloat(document.getElementById('eduExpenses').value) || 0;
+      const energyCredit = parseFloat(document.getElementById('energyCredit').value) || 0;
+      const totalIncome = w2Income + schedCIncome;
+      const totalWithheld = w2Withheld + schedCFederal;
+      const stdDeduction = filingStatus === 'single' ? 13850 : filingStatus === 'married' ? 27700 : 20800;
+      const taxableIncome = Math.max(totalIncome - stdDeduction, 0);
+      let tax = 0;
+      if (filingStatus === 'single') {
+        tax = taxableIncome <= 11000 ? taxableIncome * 0.10 : taxableIncome <= 44725 ? 1100 + (taxableIncome - 11000) * 0.12 : 5147 + (taxableIncome - 44725) * 0.22;
+      } else if (filingStatus === 'hoh') {
+        tax = taxableIncome <= 15700 ? taxableIncome * 0.10 : taxableIncome <= 59850 ? 1570 + (taxableIncome - 15700) * 0.12 : 6868 + (taxableIncome - 59850) * 0.22;
+      } else {
+        tax = taxableIncome <= 22000 ? taxableIncome * 0.10 : taxableIncome <= 89450 ? 2200 + (taxableIncome - 22000) * 0.12 : 10294 + (taxableIncome - 89450) * 0.22;
+      }
+      const ctc = dependentsUnder17 * 2000;
+      const odc = otherDependents * 500;
+      const aotc = Math.min(eduExpenses * 0.25, 2500);
+      let eic = 0;
+      if (filingStatus !== 'mfs' && totalIncome < 60000 && dependentsUnder17 > 0) {
+        eic = Math.min(5600, dependentsUnder17 * 3500);
+      }
+      const totalCredits = ctc + odc + aotc + energyCredit + eic;
+      const refund = Math.max(totalWithheld + totalCredits - tax, 0);
+      let alerts = '';
+      if (ctc > 0 || aotc > 0 || eic > 0) {
+        alerts += '<p><strong>⚠️ Due Diligence Required:</strong> Form 8867 must be completed.</p>';
+      }
+      const forms = ['1040'];
+      if (ctc) forms.push('Schedule 8812');
+      if (aotc) forms.push('8863');
+      if (energyCredit) forms.push('5695');
+      if (eic) forms.push('EIC');
+      document.getElementById('summaryBox').innerHTML = `
+        <h3>Estimated Refund: $${refund.toFixed(2)}</h3>
+        <p><strong>Total Income:</strong> $${totalIncome.toFixed(2)}</p>
+        <p><strong>Taxable Income:</strong> $${taxableIncome.toFixed(2)}</p>
+        <p><strong>Tax:</strong> $${tax.toFixed(2)}</p>
+        <p><strong>Credits Applied:</strong> $${totalCredits.toFixed(2)}</p>
+        <p><strong>Federal Withheld:</strong> $${totalWithheld.toFixed(2)}</p>
+        <p><strong>Forms Required:</strong> ${forms.join(', ')}</p>
+        ${alerts}
+      `;
+      nextStep(4);
+    }
+  </script>
+</body>
+</html>
