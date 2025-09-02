@@ -1,51 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Care & Tax Services</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CARE &amp; TAX SERVICES – Stone Mtn | Client Portal</title>
   <style>
-    body { margin: 0; font-family: 'Inter', sans-serif; background: #f9f9f9; color: #1c1c1c; }
-    h1, h2 { text-align: center; }
-    h1 { font-size: 2.5rem; margin-top: 40px; }
-    .subtitle { font-size: 1.2rem; color: #555; max-width: 800px; margin: 10px auto 30px; line-height: 1.6; }
-    .hero-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
-    .hero-actions .btn-phone { font-size: 1rem; padding: 10px 20px; background: #0077cc; color: #fff; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s ease; }
-    .hero-actions .btn-phone:hover { background: #005fa3; }
-    .button-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin: 0 auto 30px; }
-    .button-bar button { padding: 12px 20px; font-size: 1rem; background-color: #1c1c1c; color: white; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s ease; }
-    .button-bar button:hover { background-color: #444; }
-    .section { display: none; opacity: 0; max-width: 1200px; margin: 0 auto; padding: 30px 20px; transition: opacity 0.5s ease; }
-    .section.fade-in { opacity: 1; }
-    .container { max-width: 800px; margin: auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .container h1 { font-size: 2rem; margin-bottom: 10px; }
-    .container label { display: block; margin-top: 20px; font-weight: 600; }
-    .container input[type="text"],
-    .container input[type="number"],
-    .container select { width: 100%; padding: 10px; margin-top: 8px; font-size: 1rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-    iframe { width: 100%; border: none; }
-    .btn { padding: 10px 20px; margin: 20px 5px 0; background: #1c1c1c; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
-    .btn:hover { background: #333; }
-    .progress { width: 100%; background: #eee; height: 8px; margin: 20px 0; border-radius: 4px; }
-    .progress-bar { width: 0; height: 100%; background: #0077cc; border-radius: 4px; transition: width 0.3s ease; }
-    .step { display: none; }
-    .step.active { display: block; }
-    .summary { margin: 20px 0; font-size: 1rem; line-height: 1.5; }
-    .disclaimer { font-size: 0.9rem; color: #777; }
+    :root{
+      --primary:#31c6b2;      /* mint/teal */
+      --primary-dark:#207b72; /* dark teal */
+      --bg:#22b3a0;
+      --card:#ffffff;
+      --text:#1e293b;
+      --muted:#64748b;
+      --radius:16px;
+      --shadow:0 8px 30px rgba(32,123,114,.18), 0 4px 12px rgba(0,0,0,.05);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      color:var(--text);
+      background: linear-gradient(180deg, var(--bg), #27b9a6 35%, #2ec0ad);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    /* Top header */
+    header{
+      width:100%;
+      padding:22px 16px 8px;
+      text-align:center;
+      color:#fff;
+      font-weight:800;
+      letter-spacing:.3px;
+      line-height:1.25;
+    }
+    header .title{
+      font-size: clamp(20px, 2.4vw, 28px);
+    }
+    header .subtitle{
+      margin-top:6px;
+      font-weight:600;
+      opacity:.95;
+      font-size:clamp(13px, 1.6vw, 15px);
+    }
+
+    /* Progress bar style accent (visual only) */
+    .progress-wrap{
+      width:min(820px, 92vw);
+      height:6px;
+      background:rgba(255,255,255,.35);
+      border-radius:999px;
+      margin:8px auto 18px;
+      overflow:hidden;
+    }
+    .progress{
+      width:40%;
+      height:100%;
+      background:#fff;
+      border-radius:999px;
+      box-shadow: inset 0 0 1px rgba(0,0,0,.25);
+    }
+
+    /* Card */
+    .card{
+      width:min(820px,92vw);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+      margin:8px auto 32px;
+    }
+
+    .card h1{
+      margin:0 0 6px;
+      font-size: clamp(18px, 2.2vw, 24px);
+    }
+    .card p.lead{
+      margin: 0 0 18px;
+      color:var(--muted);
+      font-size: clamp(14px, 1.6vw, 15.5px);
+    }
+
+    /* Buttons row */
+    .actions{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (max-width:640px){
+      .actions{ grid-template-columns: 1fr; }
+    }
+
+    .btn{
+      border:0;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.55rem;
+      padding:12px 16px;
+      border-radius:14px;
+      background:var(--primary-dark);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      cursor:pointer;
+      transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+      box-shadow: 0 2px 0 rgba(0,0,0,.08);
+      user-select:none;
+    }
+    .btn:hover{ background:#176c63; }
+    .btn:active{ transform: translateY(1px); }
+    .btn.secondary{
+      background:#fff;
+      color:var(--primary-dark);
+      border:2px solid var(--primary-dark);
+      box-shadow:none;
+    }
+    .btn.secondary:hover{
+      background:#f5fffe;
+    }
+
+    /* Iframe section */
+    .iframe-wrap{
+      display:none;
+      flex-direction:column;
+      gap:12px;
+    }
+    .iframe-toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      position:sticky;
+      top:0;
+      background:var(--card);
+      padding-bottom:4px;
+      z-index:2;
+    }
+    .iframe-title{
+      font-weight:700;
+      color:var(--muted);
+      font-size:14px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    iframe{
+      width:100%;
+      height:72vh; /* ample space; responsive */
+      border:0;
+      border-radius:12px;
+      box-shadow: inset 0 0 0 1px rgba(2, 88, 79, .06);
+      background:#f8fafc;
+    }
+
+    /* Footer */
+    footer{
+      color:#e6fffb;
+      opacity:.9;
+      font-size:12px;
+      padding:12px 16px 24px;
+      text-align:center;
+    }
   </style>
 </head>
 <body>
- <h1>Welcome! How can we help you today?</h1>
-  <p class="subtitle">From booking appointments to uploading documents and estimating your taxes, our intuitive portal empowers you to manage everything in one place. Need a hand? Reach out directly below.</p>
-  <div class="hero-actions">
-    <button class="btn-phone" onclick="location.href='tel:18887117206'">📞 Call Us: (888) 711‑7206</button>
-  </div>
-  <div class="button-bar">
-    <button onclick="location.href='https://info-caretaxservices.zohobookings.com/portal-embed#/caretaxservices'">🗕️ Book an Appointment</button>
-      <button onclick="location.href='https://forms.zohopublic.com/caretaxservices1/form/UploadDocuments/formperma/OAaNOkGETVmffER-Az1hxQsMh5xx16JKVQwJ6WM4XVs'">🛄 Upload Documents</button>
-    <button onclick="location.href='https://forms.zohopublic.com/caretaxservices1/form/ObamaCareACAApplication/formperma/8EAPqKYkMzzqR9Y-GHKNP7sAhqqBgokbkmuST7uujZ4'">🏥 Obama-Care Application</button>
-      <button onclick="location.href='https://malikissak04.github.io/caretaxEstimator/'">📊 Tax Estimator</button>
+  <header>
+    <div class="title">CARE &amp; TAX SERVICES – Stone Mtn | Client Portal</div>
+    <div class="subtitle">Service you can trust, Support that you deserve</div>
+  </header>
+
+  <div class="progress-wrap" aria-hidden="true">
+    <div class="progress"></div>
   </div>
 
+  <main class="card" id="portalCard">
+    <!-- Main options view -->
+    <section id="homeView">
+      <h1>Welcome! How can we help you today?</h1>
+      <p class="lead">
+        From booking appointments to uploading documents and estimating your taxes,
+        manage everything here in one place. Choose an option below.
+      </p>
+
+      <div class="actions">
+        <button class="btn" data-link="https://info-caretaxservices.zohobookings.com/portal-embed#/caretaxservices" data-title="Book an Appointment">📅 Book an Appointment</button>
+        <button class="btn" data-link="https://forms.zohopublic.com/caretaxservices1/form/UploadDocuments/formperma/OAaNOkGETVmffER-Az1hxQsMh5xx16JKVQwJ6WM4XVs" data-title="Upload Documents">📤 Upload Documents</button>
+        <button class="btn" data-link="https://forms.zohopublic.com/caretaxservices1/form/ObamaCareACAApplication/formperma/8EAPqKYkMzzqR9Y-GHKNP7sAhqqBgokbkmuST7uujZ4" data-title="ObamaCare Application">🧾 ObamaCare Application</button>
+        <button class="btn" data-link="https://example.com" data-title="Tax Estimator">📊 Tax Estimator</button>
+      </div>
+    </section>
+
+    <!-- Iframe view -->
+    <section id="iframeView" class="iframe-wrap" aria-hidden="true">
+      <div class="iframe-toolbar">
+        <button id="backBtn" class="btn secondary">← Back</button>
+        <div class="iframe-title" id="iframeTitle">Loading…</div>
+      </div>
+      <iframe id="portalFrame" title="Client Portal Content" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Care &amp; Tax Services — Stone Mountain</footer>
+
+  <script>
+    // Elements
+    const homeView = document.getElementById('homeView');
+    const iframeView = document.getElementById('iframeView');
+    const backBtn = document.getElementById('backBtn');
+    const iframeTitle = document.getElementById('iframeTitle');
+    const frame = document.getElementById('portalFrame');
+    const buttons = document.querySelectorAll('.actions .btn');
+
+    // Utility: switch to iframe view with selected URL
+    function openInsidePortal(url, title){
+      iframeTitle.textContent = title || 'External page';
+      frame.src = url;
+      homeView.style.display = 'none';
+      iframeView.style.display = 'flex';
+      iframeView.setAttribute('aria-hidden', 'false');
+      window.scrollTo({ top: document.querySelector('header').offsetTop, behavior: 'smooth' });
+    }
+
+    // Utility: go back to the home menu
+    function backToHome(){
+      frame.src = 'about:blank';
+      iframeView.style.display = 'none';
+      iframeView.setAttribute('aria-hidden', 'true');
+      homeView.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Bind buttons
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        openInsidePortal(btn.dataset.link, btn.dataset.title);
+      });
+    });
+
+    backBtn.addEventListener('click', backToHome);
+
+    // Dynamic year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Make iframe height adapt a bit on small screens
+    function adjustIframeHeight(){
+      const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+      frame.style.height = Math.max(500, Math.round(vh * 0.72)) + 'px';
+    }
+    adjustIframeHeight();
+    window.addEventListener('resize', adjustIframeHeight);
+  </script>
 </body>
 </html>
