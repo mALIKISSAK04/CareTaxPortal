@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CARE &amp; TAX SERVICES | Client Portal</title>
+  <title>CARE &amp; TAX SERVICES – Stone Mtn | Client Portal</title>
   <style>
     :root{
       --primary:#31c6b2;      /* mint/teal */
@@ -66,7 +66,7 @@
       border-top: 2px solid rgba(255, 255, 255, 0.4); padding-top: 6px;
     }
 
-    /* Progress bar style accent */
+    /* Progress bar accent */
     .progress-wrap{
       width:min(820px, 92vw);
       height:6px;
@@ -95,7 +95,7 @@
     .card h1{ margin:0 0 6px; font-size: clamp(18px, 2.2vw, 24px); }
     .card p.lead{ margin: 0 0 18px; color:var(--muted); font-size: clamp(14px, 1.6vw, 15.5px); }
 
-    /* Buttons row */
+    /* Buttons grid */
     .actions{
       display:grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
@@ -142,13 +142,19 @@
   </style>
 </head>
 <body>
-  <!-- Top Go Back button -->
+  <!-- Top Go Back link (opens top-level window) -->
   <div class="top-links">
-    <a href="#" id="goBackTop" class="mini-btn">Go Back</a>
+    <a
+      href="https://malikissak04.github.io/Client-LandingPage/"
+      target="_top"
+      rel="noopener"
+      id="goBackTop"
+      class="mini-btn"
+    >Go Back</a>
   </div>
 
   <header>
-    <div class="title">CARE &amp; TAX SERVICES | Client Portal</div>
+    <div class="title">CARE &amp; TAX SERVICES – Stone Mtn | Client Portal</div>
     <div class="subtitle">Service you can trust, Support that you deserve</div>
   </header>
 
@@ -172,16 +178,22 @@
         <button class="btn" data-link="https://malikissak04.github.io/caretaxEstimator/" data-title="Tax Estimator">📊 Tax Estimator</button>
       </div>
 
-      <!-- Bottom Go Back button -->
+      <!-- Bottom Go Back link -->
       <div class="top-links" style="padding-top:14px;">
-        <a href="#" id="goBackBottom" class="mini-btn">Go Back</a>
+        <a
+          href="https://malikissak04.github.io/Client-LandingPage/"
+          target="_top"
+          rel="noopener"
+          id="goBackBottom"
+          class="mini-btn"
+        >Go Back</a>
       </div>
     </section>
 
     <!-- Iframe view -->
     <section id="iframeView" class="iframe-wrap" aria-hidden="true">
       <div class="iframe-toolbar">
-        <button id="backBtn" class="btn secondary">← Back</button>
+        <button id="backBtn" class="btn">← Back</button>
         <div class="iframe-title" id="iframeTitle">Loading…</div>
       </div>
       <iframe id="portalFrame" title="Client Portal Content" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
@@ -199,19 +211,18 @@
     const frame = document.getElementById('portalFrame');
     const buttons = document.querySelectorAll('.actions .btn');
 
-    // Target URL for Go Back button
-    const LANDING_URL = 'https://www.caretaxservices.com/gethelpnow';
-
-    // Make both Go Back buttons redirect top-level browser
-    function goBack(event) {
-      event.preventDefault();
-      window.top.location.href = LANDING_URL;
+    // Fallback: if some hosts ignore target="_top", try a JS top-level redirect on click
+    function ensureTopNav(anchorId){
+      const a = document.getElementById(anchorId);
+      if(!a) return;
+      a.addEventListener('click', function(){
+        try { window.top.location.assign(this.href); } catch(_) { /* default link still works */ }
+      });
     }
+    ensureTopNav('goBackTop');
+    ensureTopNav('goBackBottom');
 
-    document.getElementById('goBackTop').addEventListener('click', goBack);
-    document.getElementById('goBackBottom').addEventListener('click', goBack);
-
-    // Open content inside iframe
+    // Open selected tool inside iframe
     function openInsidePortal(url, title){
       iframeTitle.textContent = title || 'External page';
       frame.src = url;
@@ -221,7 +232,7 @@
       window.scrollTo({ top: document.querySelector('header').offsetTop, behavior: 'smooth' });
     }
 
-    // Back to internal menu
+    // Back to menu (internal)
     function backToHome(){
       frame.src = 'about:blank';
       iframeView.style.display = 'none';
@@ -230,29 +241,16 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Bind main action buttons
+    // Bind main action buttons for iframe view
     buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        openInsidePortal(btn.dataset.link, btn.dataset.title);
-      });
+      btn.addEventListener('click', () => openInsidePortal(btn.dataset.link, btn.dataset.title));
     });
-
     backBtn.addEventListener('click', backToHome);
 
-    // Dynamic year
+    // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Adjust iframe height
-    function adjustIframeHeight(){
-      const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-      frame.style.height = Math.max(500, Math.round(vh * 0.72)) + 'px';
-    }
-    adjustIframeHeight();
-    window.addEventListener('resize', adjustIframeHeight);
   </script>
 </body>
 </html>
-
-
 
 
