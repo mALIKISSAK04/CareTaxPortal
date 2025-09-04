@@ -28,31 +28,45 @@
       align-items:center;
     }
 
-/* Top header */
-header {
-  width: 100%;
-  padding: 22px 16px 12px; /* more breathing room at bottom */
-  text-align: center;
-  color: #fff;
-  font-weight: 800;
-  letter-spacing: .3px;
-  line-height: 1.25;
-}
+    /* Top quick-links bar */
+    .top-links{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      padding:10px 12px 6px;
+    }
+    .mini-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 14px;
+      border-radius:999px;
+      font-weight:700;
+      text-decoration:none;
+      border:2px solid rgba(255,255,255,.9);
+      color:#fff;
+      background:transparent;
+      transition:background .15s ease, transform .06s ease;
+    }
+    .mini-btn:hover{ background:rgba(255,255,255,.15); transform:translateY(1px); }
 
-header .title {
-  font-size: clamp(20px, 2.4vw, 28px);
-  margin-bottom: 12px; /* extra space below title */
-}
+    /* Top header */
+    header {
+      width: 100%;
+      padding: 22px 16px 12px;
+      text-align: center;
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: .3px;
+      line-height: 1.25;
+    }
+    header .title { font-size: clamp(20px, 2.4vw, 28px); margin-bottom: 12px; }
+    header .subtitle {
+      font-weight: 600; opacity: .95; font-size: clamp(13px, 1.6vw, 15px);
+      border-top: 2px solid rgba(255, 255, 255, 0.4); padding-top: 6px;
+    }
 
-header .subtitle {
-  font-weight: 600;
-  opacity: .95;
-  font-size: clamp(13px, 1.6vw, 15px);
-  border-top: 2px solid rgba(255, 255, 255, 0.4); /* clean divider */
-  padding-top: 6px; /* just enough for the line to breathe */
-}
-
-    /* Progress bar style accent (visual only) */
+    /* Progress bar style accent */
     .progress-wrap{
       width:min(820px, 92vw);
       height:6px;
@@ -78,16 +92,8 @@ header .subtitle {
       padding:22px;
       margin:8px auto 32px;
     }
-
-    .card h1{
-      margin:0 0 6px;
-      font-size: clamp(18px, 2.2vw, 24px);
-    }
-    .card p.lead{
-      margin: 0 0 18px;
-      color:var(--muted);
-      font-size: clamp(14px, 1.6vw, 15.5px);
-    }
+    .card h1{ margin:0 0 6px; font-size: clamp(18px, 2.2vw, 24px); }
+    .card p.lead{ margin: 0 0 18px; color:var(--muted); font-size: clamp(14px, 1.6vw, 15.5px); }
 
     /* Buttons row */
     .actions{
@@ -118,61 +124,29 @@ header .subtitle {
     }
     .btn:hover{ background:#176c63; }
     .btn:active{ transform: translateY(1px); }
-    .btn.secondary{
-      background:#fff;
-      color:var(--primary-dark);
-      border:2px solid var(--primary-dark);
-      box-shadow:none;
-    }
-    .btn.secondary:hover{
-      background:#f5fffe;
-    }
 
     /* Iframe section */
-    .iframe-wrap{
-      display:none;
-      flex-direction:column;
-      gap:12px;
-    }
+    .iframe-wrap{ display:none; flex-direction:column; gap:12px; }
     .iframe-toolbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      position:sticky;
-      top:0;
-      background:var(--card);
-      padding-bottom:4px;
-      z-index:2;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      position:sticky; top:0; background:var(--card); padding-bottom:4px; z-index:2;
     }
-    .iframe-title{
-      font-weight:700;
-      color:var(--muted);
-      font-size:14px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
+    .iframe-title{ font-weight:700; color:var(--muted); font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     iframe{
-      width:100%;
-      height:72vh; /* ample space; responsive */
-      border:0;
-      border-radius:12px;
-      box-shadow: inset 0 0 0 1px rgba(2, 88, 79, .06);
-      background:#f8fafc;
+      width:100%; height:72vh; border:0; border-radius:12px;
+      box-shadow: inset 0 0 0 1px rgba(2, 88, 79, .06); background:#f8fafc;
     }
 
     /* Footer */
-    footer{
-      color:#e6fffb;
-      opacity:.9;
-      font-size:12px;
-      padding:12px 16px 24px;
-      text-align:center;
-    }
+    footer{ color:#e6fffb; opacity:.9; font-size:12px; padding:12px 16px 24px; text-align:center; }
   </style>
 </head>
 <body>
+  <!-- Top Go Back button -->
+  <div class="top-links">
+    <a href="#" id="goBackTop" class="mini-btn">Go Back</a>
+  </div>
+
   <header>
     <div class="title">CARE &amp; TAX SERVICES – Stone Mtn | Client Portal</div>
     <div class="subtitle">Service you can trust, Support that you deserve</div>
@@ -197,6 +171,11 @@ header .subtitle {
         <button class="btn" data-link="https://forms.zohopublic.com/caretaxservices1/form/ObamaCareACAApplication/formperma/8EAPqKYkMzzqR9Y-GHKNP7sAhqqBgokbkmuST7uujZ4" data-title="ObamaCare Application">🧾 ObamaCare Application</button>
         <button class="btn" data-link="https://malikissak04.github.io/caretaxEstimator/" data-title="Tax Estimator">📊 Tax Estimator</button>
       </div>
+
+      <!-- Bottom Go Back button -->
+      <div class="top-links" style="padding-top:14px;">
+        <a href="#" id="goBackBottom" class="mini-btn">Go Back</a>
+      </div>
     </section>
 
     <!-- Iframe view -->
@@ -220,7 +199,19 @@ header .subtitle {
     const frame = document.getElementById('portalFrame');
     const buttons = document.querySelectorAll('.actions .btn');
 
-    // Utility: switch to iframe view with selected URL
+    // Target URL for Go Back button
+    const LANDING_URL = 'https://malikissak04.github.io/Client-LandingPage/';
+
+    // Make both Go Back buttons redirect top-level browser
+    function goBack(event) {
+      event.preventDefault();
+      window.top.location.href = LANDING_URL;
+    }
+
+    document.getElementById('goBackTop').addEventListener('click', goBack);
+    document.getElementById('goBackBottom').addEventListener('click', goBack);
+
+    // Open content inside iframe
     function openInsidePortal(url, title){
       iframeTitle.textContent = title || 'External page';
       frame.src = url;
@@ -230,7 +221,7 @@ header .subtitle {
       window.scrollTo({ top: document.querySelector('header').offsetTop, behavior: 'smooth' });
     }
 
-    // Utility: go back to the home menu
+    // Back to internal menu
     function backToHome(){
       frame.src = 'about:blank';
       iframeView.style.display = 'none';
@@ -239,7 +230,7 @@ header .subtitle {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Bind buttons
+    // Bind main action buttons
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         openInsidePortal(btn.dataset.link, btn.dataset.title);
@@ -248,10 +239,10 @@ header .subtitle {
 
     backBtn.addEventListener('click', backToHome);
 
-    // Dynamic year in footer
+    // Dynamic year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Make iframe height adapt a bit on small screens
+    // Adjust iframe height
     function adjustIframeHeight(){
       const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
       frame.style.height = Math.max(500, Math.round(vh * 0.72)) + 'px';
@@ -261,5 +252,6 @@ header .subtitle {
   </script>
 </body>
 </html>
+
 
 
